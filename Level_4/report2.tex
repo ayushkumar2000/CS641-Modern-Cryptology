@@ -1,0 +1,100 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{listings}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+% ===========QUESTION 1============
+\begin{center}
+  \Large\textbf{CS641: Level 1}\\
+  \Large\textbf{Team: TrojanHorse}\\
+  \medskip
+  \large\textit{Members:\quad}\\
+  \large\textit{Ayush Kumar, 180174\quad}\\
+  \large\textit{Rishav Kumar, 180612\quad}\\
+  \large\textit{Nilay Majorwar, 180483\quad}\\
+  \medskip
+  \large\textit{January 23, 2020\quad}
+\end{center}
+
+\bigskip
+\bigskip
+
+\textbf{Reaching the ciphertext: }
+\medskip
+
+Reaching the ciphertext was straightforward:
+\begin{enumerate}
+  \item Speak \texttt{go} at the first screen.
+  \item \texttt{read} the instructions on the boulder in the second screen.
+  \item As in the instructions, speak \texttt{enter} at the second screen to enter the level's main chamber.
+  \item The chamber is empty, except for a locked door and a glass panel. \texttt{read} the glass panel to get the ciphertext.
+\end{enumerate}
+
+\bigskip
+\bigskip
+
+\textbf{Ciphertext on glass panel: }
+
+\begin{lstlisting}
+Age qlmd dbvdhdt vqd nrhxv iqljsdh gn vqd ilmdx. Lx age ilb xdd vqdhd rx 
+bgvqrbw gn rbvdhdxv rb vqd iqljsdh. Xgjd gn vqd olvdh iqljsdhx kroo sd jghd 
+rbvdhdxvrbw vqlb vqrx gbd, r lj xdhrgex. Vqd igtd exdt ngh vqrx jdxxlwd rx l 
+xrjpod xesxvrvevrgb irpqdh rb kqriq trwrvx qlmd sddb xqrnvdt sa 6 polidx. 
+Ngh vqrx hgebt plxxkght rx wrmdb sdogk, krvqgev vqd uegvdx.
+
+emTc88Qqjt
+\end{lstlisting}
+
+\bigskip
+\bigskip
+
+\textbf{Identifying the encryption method: }
+\medskip
+
+It was told in the classroom its a 3 round DES. We observed that on entering a plaintext of length 8-16 i.e. we get ciphertext of length 16. From here we concluded that the input is converted into plaintext(for DES) by mapping 2 letters to a single letter. Also in the output we observed that all letters are between 'f' and 'u'. Hence we concluded that the input text is converted to plaintext by the following formulae:
+
+plaintext[i]= (inputtext[2*i]-'f')*16 + (inputtext[2*i+1]-'f')\\
+
+Also on entering 'f', 'ff' or 'fff' we get same output hence we confirm 'f' is used for padding.
+After this step it is a simple DES.
+
+
+
+\medskip
+
+
+\pagebreak
+
+\textbf{Breaking the cipher: }
+
+\begin{enumerate}
+  \item \textbf{Getting plain text from input text : }
+  \\
+ We use this formulae:\\
+ plaintext[i]= (inputtext[2*i]-'f')*16 + (inputtext[2*i+1]-'f')\\
+ 
+ 
+
+
+ \item \textbf{Getting Key 3: }
+  We selected two 16 letter text such that left part of both are different and right part is same [R0,L0] and [R0',L0']. Then we applied [ IP\textsuperscript{-1} ] on this text. We gave this text as input to the DES. We got a 16 bit output. We applied [IPINV \textsuperscript{-1}] on this to get [R3, L3] & [R3', L3'].  
+\\\\
+Then we computed differentials: [R3del = R3 xor R3'] and [L3del = L3 xor L3'], [R0del = R0 xor R0'] and [L0del = L0 xor L0']. We computed differential output of permuation box as [R3del xor L3del]. We applied [ Perm\textsuperscript{-1} ] on this and got differential output of S-BOX. We then computed differential input of S-BOX by expanding R3del. 
+
+Now we know Differential input and output. We find all possible pairs of 
+  
+\end{enumerate}
+
+$$--------------------$$
+
+\end{document}
+\grid
+\grid

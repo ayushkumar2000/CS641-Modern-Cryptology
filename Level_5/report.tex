@@ -1,0 +1,141 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{listings}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+% ===========QUESTION 1============
+\begin{center}
+  \Large\textbf{CS641: Level 5}\\
+  \Large\textbf{Team: TrojanHorse}\\
+  \medskip
+  \large\textit{Members:\quad}\\
+  \large\textit{Ayush Kumar, 180174\quad}\\
+  \large\textit{Rishav Kumar, 180612\quad}\\
+  \large\textit{Nilay Majorwar, 180483\quad}\\
+  \medskip
+  \large\textit{March 9, 2020\quad}
+\end{center}
+
+\bigskip
+\bigskip
+
+\textbf{Reaching the instructions: }
+\medskip
+
+Reaching the instructions was tricky in this level:
+\begin{enumerate}
+  \item Speak \texttt{go} to proceed on the passage. Soon, we start falling into the lake.
+  \item \texttt{wave} the magic wand to slow down the fall and avoid death.
+  \item \texttt{dive} into the lake to reach the internal pool.
+  \item \texttt{go} into the cave, to reach the main chamber.
+  \item \texttt{read} the glass panel to get instructions for the cryptosystem.
+\end{enumerate}
+
+\bigskip
+\bigskip
+
+\textbf{The spirit's instructions: }
+
+\begin{center}
+  \texttt{"This is another magical screen. And this one I remember perfectly... Consider a block of size 8 bytes as 8 x 1 vector over $F_{128}$ -- constructed using the degree 7 irreducible polynomial $x^7 + x + 1$ over $F_2$. Define two transformations: first a linear transformation given by invertible 8 x 8 key matrix A with elements from $F_{128}$ and second an exponentiation given by 8 x 1 vector E whose elements are numbers between 1 and 126. E is applied on a block by taking the ith element of the block and raising it to the power given by ith element in E. Apply these transformations in the sequence EAEAE on the input block to obtain the output block. Both E and A are part of the key. You can see the coded password by simply whispering 'password' near the screen..."}
+\end{center}
+
+\begin{center}
+  \texttt{Encrypted password: gkftmrfrfolimtgrlrihgniummflhkio}
+\end{center}
+
+\bigskip
+\bigskip
+
+\textbf{Breaking the encoding: }
+\medskip
+
+The encoding is almost the same as in Level 4. Since we are using the $F_{128}$ field here, each pair of characters must encode to a number from 0 to 127. Thus, the set of character-pairs goes from \texttt{ff} to only \texttt{mu} (and not \texttt{uu}) (\texttt{mu $\equiv$ (7, 15) $\equiv$ 7*16 + 15 $\equiv$ 127})
+
+\medskip
+\pagebreak
+
+\textbf{Observation: }
+\medskip
+
+Consider the following plaintext-ciphertext pairs:
+
+\begin{center}
+\texttt{ff ff ff ff ff ff ff fg $\rightarrow$ ff ff ff ff ff ff ff lt}
+
+\texttt{ff ff ff ff ff fg ff ff $\rightarrow$ ff ff ff ff ff li jf ih}
+
+\texttt{ff ff ff fg ff ff ff ff $\rightarrow$ ff ff ff kk lq ig gm gh}
+
+\texttt{ff fg ff ff ff ff ff ff $\rightarrow$ ff kn gh lp im ls hj mr}
+\end{center}
+\medskip
+
+The most important observation to make here, is that the $i^{th}$ block of the plaintext only affects the corresponding $i^{th}$ block of ciphertext and the blocks after that. Or in other terms, \textbf{the $i^{th}$ block of the plaintext affects the $j^{th}$ block of ciphertext iff $i \leq j$}.So the $1^{st}$ block of the ciphertext depends only on the $1^{st}$ block of the plaintext, the $2^{nd}$ block of the ciphertext depends only on the first two blocks of the plaintext, and so on.
+
+\medskip
+\bigskip
+
+\textbf{Getting the first block of decrypted password: }
+\medskip
+
+The above observation makes it tremendously straightforward to find the decrypted password. Note that \textbf{the first block of encrypted password depends only on the first block of decrypted password}. Also, the correspondence must be one-one, otherwise one ciphertext will correspond to multiple plaintext which cannot happen.
+\medskip
+
+So, we can create a group of 128 plaintext blocks that have all blocks set to zero, except the first block which takes the values \texttt{0 to 127}. We know that the first block of the encrypted password is \texttt{gk}, and depends only on the first block of the plaintext. Now, \textbf{one of the plaintexts of the group must result in the ciphertext with the first block as \texttt{gk}}. The first block of this plaintext is then the first block of the decrypted ciphertext.
+\medskip
+\bigskip
+
+\textbf{Getting subsequent blocks of decrypted password:}
+\medskip
+
+Consider the second block. The second block of the encrypted password depends on the first two blocks of the plaintext. We already know the first block, and just need to loop over the 128 possible values of the second block.
+\medskip
+
+So, we create a group of plaintexts which have the first block equal to the value found in previous section, the second block takes the 128 possible values in $F_{128}$, and rest of the blocks are set to zero.
+\medskip
+
+Again, the second block also holds a one-to-one correspondence between plaintext and ciphertext, thus we wll get a unique value for the second block.
+\medskip
+
+Similarly, fixing the values of blocks and looping over the next block, we can get the value of each block easily. Repeating this process for both the blocks of the encrypted password, we get the full decrypted password as \texttt{mkmlmgmhlololulnmllulkmolpllmpmh}.
+\medskip
+\bigskip
+
+\textbf{Each block requires 127 encryptions to get the corresponding block of decrypted password. So, the total number of chosen-plaintexts required is $127 \times 8$.}
+\medskip
+\bigskip
+\pagebreak
+
+\textbf{The final decoding: }
+\bigskip
+
+Entering the final decrypted password \texttt{mkmlmgmhlololulnmllulkmolpllmpmh} into the console, the next level does not open up - only the encrypted password is shown (which is the same as the output on entering \texttt{password}). This implies that there is another decoding to be applied on this 32-character password.
+
+Now \textbf{notice that each pair of characters of the decrypted password starts with \texttt{l} or \texttt{m}}. This hints that each pair of characters can be decoded to another character. The most probable guess here would be to use ASCII. Let us consider the first few pairs of the decrypted password:
+
+\begin{center}
+  \texttt{mk $\equiv$ (7, 5) $\equiv$ 0111 0101 $\equiv$ 01110101 $\equiv$ 117 $\equiv$ u}
+
+  \texttt{ml $\equiv$ (7, 6) $\equiv$ 0111 0110 $\equiv$ 01110110 $\equiv$ 118 $\equiv$ v}
+
+  \texttt{mg $\equiv$ (7, 1) $\equiv$ 0111 0001 $\equiv$ 01110001 $\equiv$ 113 $\equiv$ q}
+
+  \texttt{...}
+\end{center}
+
+Proceeding in a similar manner, we get the final, decoded password to be \textbf{uvqriiohvoeyjfzr}. Entering this into the console, we proceed to the next level.
+
+$$--------------------$$
+
+\end{document}
+\grid
+\grid

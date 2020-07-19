@@ -1,0 +1,234 @@
+RAW CIPHERTEXT:
+
+xwygjmf pg ypdu likl ryok jy jkoyuuy yi mzj wyqnulb uzxygm lgtlolui mt lcy kpiy. yi wpcot, wow wotl ffpz wr xwygjimc tlk ybuyl it pkm uwds yi mzj aklv ygwffw. buy impmlg ld yim fwsy vwk wu ltruzw rpzi mlo. tlfq wsy imwrd lcwi motk klrm pzm ykp mqp qd yim fluyv. wk qprmy xwso swq p zldlcwkp, tt wimu uyfw atwpmg! wf gi mpcuicq, pmxwy buw byiogpru:
+
+pih_gtqls_us
+
+-----------------------------------
+
+MUSHROOM MAN:
+
+You take some mushrooms in your hand and put it in the hole. Someone grabs the mushrooms from your hand! You then hear chomping sound as if they are being quickly eaten. After a while, the sounds cease ...You figure that perhaps some rat is sitting inside the hole eating mushrooms. Suddenly, you hear a squeaky voice speaking from inside the hole!
+
+"Oh, thank you very much for the mushrooms! I have been hungry for so long!! I am a poor spirit trapped inside this hole by an evil man. Maybe you can help me be free ... (sigh) oh, forget it. I'll help you pass this chamber though. Note down and speak out the magic words ''thrnxxtzy'' for the hidden door to become visible. The door lies hidden in the main chamber."
+
+----------------------------------------
+
+CAPS CIPHERTEXT:
+
+XWYGJMFPGYPDULIKLRYOKJYJKOYUUYYIMZJWYQNULBUZXYGMLGTLOLUIMTLCYKPIYYIWPCOTWOWWOTLFFPZWRXWYGJIMCTLKYBUYLITPKMUWDSYIMZJAKLVYGWFFWBUYIMPMLGLDYIMFWSYVWKWULTRUZWRPZIMLOTLFQWSYIMWRDLCWIMOTKKLRMPZMYKPMQPQDYIMFLUYVWKQPRMYXWSOSWQPZLDLCWKPTTWIMUUYFWATWPMGWFGIMPCUICQPMXWYBUWBYIOGPRU
+
+----------------------------------------
+
+CIPHERTEXT IN BLOCKS OF 9:
+
+XWYGJMFPG
+YPDULIKLR
+YOKJYJKOY
+UUYYIMZJW
+YQNULBUZX
+YGMLGTLOL
+UIMTLCYKP
+IYYIWPCOT
+WOWWOTLFF
+PZWRXWYGJ
+IMCTLKYBU
+YLITPKMUW
+DSYIMZJAK
+LVYGWFFWB
+UYIMPMLGL
+DYIMFWSYV
+WKWULTRUZ
+WRPZIMLOT
+LFQWSYIMW
+RDLCWIMOT
+KKLRMPZMY
+KPMQPQDYI
+MFLUYVWKQ
+PRMYXWSOS
+WQPZLDLCW
+KPTTWIMUU
+YFWATWPMG
+WFGIMPCUI
+CQPMXWYBU
+WBYIOGPRU
+
+------------------------------------
+
+COLUMN TEXTS:
+
+XYYUYYUIWPIYDLUDWWLRKKMPWKYWCW
+WPOUQGIYOZMLSVYYKRFDKPFRQPFFQB
+YDKYNMMYWWCIYYIIWPQLLMLMPTWGPY
+GUJYULTIWRTTIGMMUZWCRQUYZTAIMI
+JLYILGLWOXLPMWPFLISWMPYXLWTMXO
+MIJMBTCPTWKKZFMWTMYIPQVWDIWPWG
+FKKZULYCLYYMJFLSRLIMZDWSLMPCYP
+PLOJZOKOFGBUAWGYUOMOMYKOCUMUBR
+GRYWXLPTFJUWKBLVZTWTYIQSWUGIUU
+
+
+
+XWYGJ
+MFPGY
+PDULI
+KLRYO
+KJYJK
+OYUUY
+YIMZJ
+WYQNU
+LBUZX
+YGMLG
+TLOLU
+IMTLC
+YKPIY
+YIWPC
+OTWOW
+WOTLF
+FPZWR
+XWYGJ
+IMCTL
+KYBUY
+LITPK
+MUWDS
+YIMZJ
+AKLVY
+GWFFW
+BUYIM
+PMLGL
+DYIMF
+WSYVW
+KWULT
+RUZWR
+PZIML
+OTLFQ
+WSYIM
+WRDLC
+WIMOT
+KKLRM
+PZMYK
+PMQPQ
+DYIMF
+LUYVW
+KQPRM
+YXWSO
+SWQPZ
+LDLCW
+KPTTW
+IMUUY
+
+
+----------
+
+01: XWYGJ
+02: MFPGY
+03: PDULI
+04: KLRYO
+05: KJYJK
+06: OYUUY
+07: YIMZJ
+08: WYQNU
+09: LBUZX
+10: YGMLG
+11: TLOLU
+12: IMTLC
+13: YKPIY
+14: YIWPC
+15: OTWOW
+16: WOTLF
+17: FPZWR
+18: XWYGJ
+19: IMCTL
+20: KYBUY
+21: LITPK
+22: MUWDS
+23: YIMZJ
+24: AKLVY
+25: GWFFW
+26: BUYIM
+27: PMLGL
+28: DYIMF
+29: WSYVW
+30: KWULT
+31: RUZWR
+32: PZIML
+33: OTLFQ
+34: WSYIM
+35: WRDLC
+36: WIMOT
+37: KKLRM
+38: PZMYK
+39: PMQPQ
+40: DYIMF
+41: LUYVW
+42: KQPRM
+43: YXWSO
+44: SWQPZ
+45: LDLCW
+46: KPTTW
+47: IMUUY
+48: FWATW
+49: PMGWF
+50: GIMPC
+51: UICQP
+52: MXWYB
+53: UWBYI
+54: OGPRU
+
+
+
+
+XWYGJ
+MFPGY
+PDULI
+KLRYO
+KJYJK
+OYUUY
+YIMZJ
+WYQNU
+LBUZX
+YGMLG
+TLOLU
+IMTLC
+YKPIY
+YIWPC
+OTWOW
+WOTLF
+FPZWR
+XWYGJ
+IMCTL
+KYBUY
+LITPK
+MUWDS
+YIMZJ
+AKLVY
+GWFFW
+BUYIM
+PMLGL
+DYIMF
+WSYVW
+KWULT
+RUZWR
+PZIML
+OTLFQ
+WSYIM
+WRDLC
+WIMOT
+KKLRM
+PZMYK
+PMQPQ
+DYIMF
+LUYVW
+KQPRM
+YXWSO
+SWQPZ
+LDLCW
+KPTTW
+IMUUY
+FWATW
+PMGWF
+GIMPC
+UICQP
+MXWYB
+UWBYI
+OGPRU

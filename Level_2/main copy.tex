@@ -1,0 +1,223 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{listings}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+% ===========QUESTION 1============
+\begin{center}
+  \Large\textbf{CS641: Level 2}\\
+  \Large\textbf{Team: TrojanHorse}\\
+  \medskip
+  \large\textit{Members:\quad}\\
+  \large\textit{Ayush Kumar, 180174\quad}\\
+  \large\textit{Rishav Kumar, 180612\quad}\\
+  \large\textit{Nilay Majorwar, 180483\quad}\\
+  \medskip
+  \large\textit{January 22, 2020\quad}
+\end{center}
+
+\bigskip
+\bigskip
+
+\textbf{Reaching the ciphertext: }
+\medskip
+
+The chamber consists of two important texts:
+\begin{enumerate}
+  \item \texttt{read} the text on the glass panel at the first screen. This gives us the ciphertext.
+  \item Then, speak \texttt{go} at the first screen, to read the text on the boulder. This gives us the cryptic instructions of the Cave Man.
+\end{enumerate}
+
+\bigskip
+\bigskip
+
+\textbf{Ciphertext on glass panel: }
+
+\begin{lstlisting}
+Lg ccud qh urg tgay ejbwdkt, wmgtf su bgud nkudnk lrd vjfbg. Yrhfm qvd vng
+sfuuxytj "vkj_ecwo_ogp_ej_rnfkukf" wt iq urtuwjm. Ocz iqa jdag vio uzthsivi 
+pqx vkj pgyd encpggt. Uy hopg yjg fhkz arz hkscv ckoq pgfn vu wwygt nkioe
+zttft djkth.
+\end{lstlisting}
+
+\bigskip
+\bigskip
+
+\textbf{Identifying the encryption method: }
+\medskip
+
+The method is clearly an alphabet-based one, as the spaces are evenly distributed throughout the text. The method is clearly an alphabet-based one, as the spaces are evenly distributed throughout the text. 
+\medskip
+
+Frequency analysis results show that no letter has a frequency percentage of more than 10\% (\texttt{G} has the highest frequency, 8.65\%, followed by \texttt{T} with 7.03\%). Such a skewed English text would be rare, and an attempt at substitution cipher indeed quickly gets stuck into contradictory swaps. Thus, substitution cipher can be eliminated. Since permutation ciphers do not change the frequency analysis, we can also eliminate permutation cipher. 
+\medskip
+
+Since Vigenere cipher is the most popular polyalphabetic substitution cipher, we decided to first attempt the Vigenere cipher. Since the Vigenere cipher has a repeating key of fixed length (say $n$), we can check the periodic index of coincidence of the ciphertext for repeating peaks. Given below are the results of the periodic index of coincidence test (format:= $offset\ :\ score*1000$):
+\medskip
+
+$\ 1  : 42,\ $
+$\ 2  : 44,\ $
+$\ \ 3  : 46,\ $
+$\ 4  : 43,\ $
+$\ \ 5  : 39,\ $
+$\ 6  : 48,\ $
+$\ \ 7  : 47,\ $
+$\ 8  : 48,\ $
+$\ \ 9  : 56,\ $
+
+$10 : 33,\ $
+$11 : 39,\ $
+$12 : 49,\ $
+$13 : 49,\ $
+$14 : 49,\ $
+$15 : 38,\ $
+$16 : 43,\ $
+$17 : 44,\ $
+$18 : 62,\ $
+
+$19 : 35,\ $
+$20 : 31,\ $
+$21 : 51,\ $
+$22 : 34,\ $
+$23 : 31,\ $
+$24 : 52,\ $
+$25 : 49,\ $
+$26 : 55,\ $
+$27 : 63,\ $
+
+$28 : 46,\ $
+$29 : 47,\ $
+$30 : 31\ $
+
+\medskip
+
+We can clearly see the peaks at multiples of 9. Peaks at multiples of the key length is a characterising feature of the Vigenere cipher. Also, this observation is in line with the hint obtained from the message of the Cave Man (mentioned below).
+
+\pagebreak
+
+\textbf{Breaking the cipher: }
+
+\begin{enumerate}
+  \item \textbf{Getting the key length: }
+  
+  Since the periodic index of coincidence results have peaks at multiples of 9, it is almost certain that the \textbf{length of the key is 9}. This is also confirmed by the message of the Cave Man: 
+
+  \bigskip
+
+  \begin{center}
+    $\langle$ The face of the Cave Man $\rangle$
+
+  \texttt{The spirit of Cave Man is the keeper of the chamber. To navigate through the chamber, you must pay respect to him first. Bow, and then slowly look up. Count the number of lines in horizontal dimension -- they will stand in good stead.}
+  \end{center}
+
+  \bigskip
+
+  Since the face of the Cave Man is made up of 9 lines, this also falls in line with the results of the periodic index of coincidence test.
+
+  \item \textbf{Decryption: }
+  
+  The standard method of breaking the Vigenere cipher involves breaking up the ciphertext into blocks of size equal to the key length, and then treating each column as an independent Caesar cipher, as shown below:
+  \bigskip
+
+  \begin{minipage}{0.2\linewidth}
+\texttt{01: LGCCUDQHU}\\
+\texttt{02: RGTGAYEJB}\\
+\texttt{03: WDKTWMGTF}\\
+\texttt{04: SUBGUDNKU}\\
+\texttt{05: DNKLRDVJF}\\
+\texttt{06: BGYRHFMQV}\\
+\texttt{07: DVNGSFUUX}\\
+\texttt{08: YTJVKJECW}\\
+\texttt{09: OOGPEJRNF}\\
+\texttt{10: KUKFWTIQU}\\
+\texttt{11: RTUWJMOCZ}\\
+\texttt{12: IQAJDAGVI}\\
+\texttt{13: OUZTHSIVI}\\
+\texttt{14: PQXVKJPGY}\\
+\texttt{15: DENCPGGTU}\\
+\texttt{16: YHOPGYJGF}\\
+\texttt{17: HKZARZHKS}\\
+\texttt{18: CVCKOQPGF}\\
+\texttt{19: NVUWWYGTN}\\
+\texttt{20: KIOEZTTFT}\\
+\texttt{21: DJKTH}
+  \end{minipage}
+  \begin{minipage}{0.75\linewidth}
+    Firstly, we remove all the whitespaces and punctuation from the ciphertext, since they are not a part of the encryption, and can easily be replaced after decryption.
+    \medskip
+
+    Since the length of the key is 9, we break the ciphertext into blocks of 9, as shown. Each column is now shifted by the same offset, as the key repeats after 9 characters. Thus, each column is now an independent Caesar cipher, though not a meaningful English text, when decrypted. Following are some of the column texts:
+    \medskip
+
+    \begin{center}
+      \texttt{1: LRWSDBDYOKRIOPDYHCNKD}\\
+    \texttt{2: GGDUNGVTOUTQUQEHKVVIJ}\\
+    \texttt{3: CTKBKYNJGKUAZXNOZCUOK}\\
+    \texttt{...}
+    \end{center}
+
+    We could have used frequency analysis on each column, but each column has only 20-21 characters - too low for frequency analysis to give sufficiently accurate and reliable results, especially when the plaintext is not meaningful English.
+  \end{minipage}
+
+  \pagebreak
+
+  So instead, we look for other clues.
+
+  \begin{enumerate}[i.]
+    \item Notice that the 2-letter words \texttt{LG} and \texttt{SU} in the ciphertext both occur in the first two columns, and thus are encrypted with the same first two characters of the key. Now, there are only a handful of 2-letter words commonly used in English, which are given below: 
+    
+    \begin{center}
+      \texttt{AM, AN, AS, AT, BE, BY, DO, GO, HE, HI, IF, IN, IS, IT, ME, NO, OF, OK, ON, OR, SO, TO, UP, US, WE}
+    \end{center}
+
+    Observe that since \texttt{L} in \texttt{LG} and \texttt{S} in \texttt{SU} are 7 characters apart in the English alphabet, the corresponding decrypted letters will also be 7 characters apart in the alphabet. The only such combinations we get from the above set, are \texttt{(AM, GO)}, \texttt{(BE/BY, IF/IN/IS/IT)}, \texttt{(GO, NO)}, \texttt{(HE/HI, OF/OK/ON/OR)}, \texttt{(ME, TO)}, \texttt{(NO, UP/US)}, \texttt{(TO, AM/AN/AS/AT)}, \texttt{(UP/US, BE/BY)} and \texttt{(WE, DO)}. 
+
+    We move on with \texttt{(BE/BY, IF/IN/IS/IT)}. This gives us that the first character of the key is 
+    
+    \texttt{L - B $\equiv$ } \textbf{K},
+
+    and the second character of the key is 
+
+    \texttt{U - S $\equiv$ } \textbf{C}.
+    \bigskip
+
+    \item Now notice \texttt{IQA} in block no. 12 of the blockwise ciphertext. The first two letters \texttt{IQ} decrypt to \texttt{YO}. The third letter now has only one possibility, which is \texttt{U}. Thus, the third character of the key is \texttt{A - U $\equiv$} \textbf{G}.
+    
+    \item Look at the last word, \texttt{DJKTH}. Now, \texttt{DJK} decrypts to \texttt{THE}. The full word can then be \texttt{THESE, THERE}, etc. The fifth letter is then most certainly \texttt{E}. Thus, we get that \texttt{H} decrypts to \texttt{E}, i.e., the fifth character of the key is \texttt{H - E $\equiv$} \textbf{D}.
+    
+    \item See the word \texttt{TGAY} now. We know that \texttt{T} decrypts to \texttt{N} and \texttt{A} decrypts to \texttt{X}. There is then only one possibility for the full word, \texttt{NEXT}. Thus, \texttt{G} decrypts to \texttt{E}, and \texttt{Y} decrypts to \texttt{T}. Thus, we get fourth character of the key is \texttt{G - E $\equiv$} \textbf{C}, and the sixth character of the key is \texttt{Y - T $\equiv$} \textbf{F}.
+
+  \end{enumerate}
+
+  With six of the nine characters of the key found, the original ciphertext partially decrypts to (spaces and punctuation replaced):
+
+  \begin{center}
+    \texttt{Be wary qh uhe next ejbmber, thgtf is very nkutle joy vjfre. Speam qvt the pauuxord "the\_ecwe\_man\_be\_rnfased" to iq uhrough. Ocz you havg vie strenivi for the pgyt chambgt. Uo find tjg fxit you hksst will pgfd to uttgt nagic wotft there.}
+  \end{center}
+
+  Most words now start to pop out, for e.g. \texttt{uhe $\equiv$ THE}, \texttt{pauuxord $\equiv$ PASSWORD}, \texttt{uhrough $\equiv$ THROUGH}. With the word \texttt{pauuxord} itself, we can find out the remaining three characters of the key to be \textbf{CCB}. 
+  
+  Thus, the key of the Vigenere cipher is \textbf{KCGCDFCCB}. With this key, the text fully decrypts to: 
+
+  \begin{center}
+    \texttt{
+      Be wary of the next chamber, there is very little joy there. Speak out the password "the\_cave\_man\_be\_pleased" to go through. May you have the strength for the next chamber. To find the exit you first will need to utter magic words there.
+    }
+  \end{center}
+  
+   Speaking the phrase \texttt{the\_cave\_man\_be\_pleased} in front of the glass panel, we progress to level 3.
+\end{enumerate}
+
+$$--------------------$$
+
+\end{document}
+\grid
+\grid

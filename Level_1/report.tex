@@ -1,0 +1,147 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{listings}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+% ===========QUESTION 1============
+\begin{center}
+  \Large\textbf{CS641: Level 1}\\
+  \Large\textbf{Team: TrojanHorse}\\
+  \medskip
+  \large\textit{Members:\quad}\\
+  \large\textit{Ayush Kumar, 180174\quad}\\
+  \large\textit{Rishav Kumar, 180612\quad}\\
+  \large\textit{Nilay Majorwar, 180483\quad}\\
+  \medskip
+  \large\textit{January 23, 2020\quad}
+\end{center}
+
+\bigskip
+\bigskip
+
+\textbf{Reaching the ciphertext: }
+\medskip
+
+Reaching the ciphertext was straightforward:
+\begin{enumerate}
+  \item Speak \texttt{go} at the first screen.
+  \item \texttt{read} the instructions on the boulder in the second screen.
+  \item As in the instructions, speak \texttt{enter} at the second screen to enter the level's main chamber.
+  \item The chamber is empty, except for a locked door and a glass panel. \texttt{read} the glass panel to get the ciphertext.
+\end{enumerate}
+
+\bigskip
+\bigskip
+
+\textbf{Ciphertext on glass panel: }
+
+\begin{lstlisting}
+Age qlmd dbvdhdt vqd nrhxv iqljsdh gn vqd ilmdx. Lx age ilb xdd vqdhd rx 
+bgvqrbw gn rbvdhdxv rb vqd iqljsdh. Xgjd gn vqd olvdh iqljsdhx kroo sd jghd 
+rbvdhdxvrbw vqlb vqrx gbd, r lj xdhrgex. Vqd igtd exdt ngh vqrx jdxxlwd rx l 
+xrjpod xesxvrvevrgb irpqdh rb kqriq trwrvx qlmd sddb xqrnvdt sa 6 polidx. 
+Ngh vqrx hgebt plxxkght rx wrmdb sdogk, krvqgev vqd uegvdx.
+
+emTc88Qqjt
+\end{lstlisting}
+
+\bigskip
+\bigskip
+
+\textbf{Identifying the encryption method: }
+\medskip
+
+There were some clear clues that the method used was a substitution cipher - one of the most important clues was that \textbf{some words were repeated throughout the text}. For instance, the word \texttt{vqd} has been used 6 times, and \texttt{gn} and \texttt{rx} have been used 3 times each. Such a repetition in small-length ciphertext is almost impossible in linear cipher (with a proper, dense key), permutation cipher or modern encryption methods. So, it was easy to guess that the given ciphertext is just (mainly) a substitution over the plaintext.
+\medskip
+
+\textbf{The main clues: }
+\begin{enumerate}
+  \item The method is most certainly a classic alphabet-based encryption method, since the ciphertext has evenly distributed spaces like in English.
+  \item The length of the words also indicates alphabet-based encryption, as most words are 3-4 characters in length, like in English.
+  \item As mentioned above, there is repetition of some words like \texttt{vqd}, \texttt{gn} and \texttt{rx} in the ciphertext, which heavily points towards substitution cipher.
+\end{enumerate}
+
+\pagebreak
+
+\textbf{Breaking the cipher: }
+
+\begin{enumerate}
+  \item \textbf{Undoing the substitution: }
+  
+  The first step was obviously to run a frequency analysis of the ciphertext. 
+  
+  The last word of the ciphertext was not included in the frequency analysis. The word was completely isolated from rest of the text and had numbers in between, and thus did not seem to be part of the main English part of plaintext. Even if it were somehow a part of the English plaintext, including the word would not have had any significant impact on frequency analysis results.
+
+  \textbf{Results:}
+  \begin{enumerate}[i.]
+    \item \textbf{D}: 14.69\% (42 times)
+    \item \textbf{X}: 9.79\% (28 times)
+    \item \textbf{V}: 9.44\% (27 times)
+    
+    ...
+  \end{enumerate}
+
+  As the percentage gaps taper off, rest of the results are unreliable. Since \texttt{D} occurs well more often than others, taking \texttt{E $\rightarrow$ D} is a fair assumption.
+
+  Now, as \texttt{vqd} occurs 6 times, we can guess that \texttt{vqd $\rightarrow$ the}, which gives us \texttt{T $\rightarrow$ V} and \texttt{H $\rightarrow$ Q}. 
+  
+  It would have been reasonable to try \texttt{A $\rightarrow$ X}, except that \texttt{x} occurs consecutively in the word \texttt{plxxkght} (in the last line of ciphertext), which is not possible with \texttt{a}.
+
+  Consider the word \texttt{vqrx} that occurs in the third line of the ciphertext. With the current substitutions, we have \texttt{vqrx $\rightarrow$ THrx}, where small letters denote unsubstituted letters and capitals denote substituted letters. Since the subword \texttt{rx} also occurs 3 times in the ciphertext as a full word, we can guess that \texttt{rx $\rightarrow$ is}, which gives us \texttt{I $\rightarrow$ R} and \texttt{S $\rightarrow$ X}.
+
+  With these substitutions, the ciphertext (partially) decodes to the following:
+
+  \bigskip
+  \begin{lstlisting}
+    age HlmE EbTEhEt THE nIhST iHljsEh gn THE ilmES. lS age ilb SEE
+     THEhE IS bgTHIbw gn IbTEhEST Ib THE iHljsEh. SgjE gn THE olTEh
+      iHljsEhS kIoo sE jghE IbTEhESTIbw THlb THIS gbE, I lj SEhIgeS.
+       THE igtE eSEt ngh THIS jESSlwE IS l SIjpoE SesSTITeTIgb iIpHEh 
+       Ib kHIiH tIwITS HlmE sEEb SHInTEt sa 6 poliES. ngh THIS
+        hgebt plSSkght IS wImEb sEogk, kITHgeT THE uegTES.
+  \end{lstlisting}
+  \bigskip
+
+  Now some words are starting to pop out, like \texttt{IbTEhESTIbw $\equiv$ INTERESTING} and \texttt{SesSTITeTIgb $\equiv$ SUBSTITUTION}. This gives us 6 more substitutions.
+  
+  Proceeding like this, we get our almost complete decryption key as 
+
+  \texttt{YN\_EU\_ORCMWAVFLPHIBDQTGS\_\_} \quad\quad (i.e., \texttt{A} decrypts to \texttt{Y} and so on.)
+
+  Since some letters, namely \{c, f, y, z\} do not appear in the ciphertext, there is no way to logically find the corresponding substitutions. The blanks in the key represent these gaps.
+
+  \pagebreak
+
+  \item \textbf{Getting the password: }
+  
+  The decryption key, when applied on the first paragraph of ciphertext, gives: 
+
+  \texttt{You have entered the first chamber of the caves. As you can see there is nothing of interest in the chamber. Some of the later chambers will be more interesting than this one, i am serious. The code used for this message is a simple substitution cipher in which digits have been shifted by 6 places. For this round password is given below, without the quotes.}
+
+  The last word (the password), when decrypted, gives: 
+
+  \texttt{uvD\_88Hhmd}
+
+  The encrypted password has the character \texttt{c}, which we do not know the substitution of. Thus, there is a blank in the decrypted password, which denotes the missing character. Since there are only 4 characters we do not know the substitution of, there are only \textbf{4 possibilities for the blank, i.e. $\{j, k, x, z\}$}.
+
+  The decrypted message says that the cipher was a simple substitution cipher, but with digits shifted by 6. But since the message itself was encrypted the same way, the 6 is not the actual number in the message (our decryption key ignores numbers).
+
+  If the original number in the message is $d$, then after encryption, it will get shifted by $d$, and the number in the ciphertext and our decrypted version will be $2d\ mod\ 10$. Thus, $2d\ mod\ 10\ =\ 6$, which gives us $d\ =\ 3\ or\ 8$. Then, the number 8 in the decrypted password should actually be either $5$ or $0$, i.e. we have \textbf{2 possibilities for the number, i.e. $\{5, 0\}$}.
+  
+  Thus, we have a total of just $4 \times 2 = 8$ possibilities of the key to try. Trying them one by one, the possibility \textbf{uvDz55Hhmd} succeeds, and we enter the chamber of Level 2.
+  
+\end{enumerate}
+
+$$--------------------$$
+
+\end{document}
+\grid
+\grid

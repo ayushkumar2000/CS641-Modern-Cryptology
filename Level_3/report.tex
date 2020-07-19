@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{listings}
+
+\topmargin -.5in
+\textheight 9in
+\oddsidemargin -.25in
+\evensidemargin -.25in
+\textwidth 7in
+
+\begin{document}
+% ===========QUESTION 1============
+\begin{center}
+  \Large\textbf{CS641: Level 2}\\
+  \Large\textbf{Team: TrojanHorse}\\
+  \medskip
+  \large\textit{Members:\quad}\\
+  \large\textit{Ayush Kumar, 180174\quad}\\
+  \large\textit{Rishav Kumar, 180612\quad}\\
+  \large\textit{Nilay Majorwar, 180483\quad}\\
+  \medskip
+  \large\textit{February 1, 2020\quad}
+\end{center}
+
+\bigskip
+\bigskip
+
+\textbf{Reaching the ciphertext: }
+\medskip
+
+The inner chamber has two holes.
+\begin{enumerate}
+  \item \texttt{enter} the smaller hole and \texttt{pick} some mushrooms.
+  \item Go back to the previous chamber and now \texttt{give} the mushrooms to the man in the bigger hole.
+  \item The man gives us the secret keyword to open the hidden door. Go \texttt{back} to the main chamber, and speak the secret keyword \texttt{'thrnxxtzy'}.
+  \item \texttt{read} the ciphertext on the glass panel.
+\end{enumerate}
+
+\bigskip
+\bigskip
+
+\textbf{Ciphertext on glass panel: }
+
+\begin{center}
+  \texttt{xwygjmf pg ypdu likl ryok jy jkoyuuy yi mzj wyqnulb uzxygm lgtlolui mt lcy kpiy. yi wpcot, wow wotl ffpz wr xwygjimc tlk ybuyl it pkm uwds yi mzj aklv ygwffw. buy impmlg ld yim fwsy vwk wu ltruzw rpzi mlo. tlfq wsy imwrd lcwi motk klrm pzm ykp mqp qd yim fluyv. wk qprmy xwso swq p zldlcwkp, tt wimu uyfw atwpmg! wf gi mpcuicq, pmxwy buw byiogpru:}
+  \medskip
+
+  \texttt{pih\_gtqls\_us}
+\end{center}
+
+\bigskip
+\bigskip
+
+\textbf{Identifying the encryption method: }
+\medskip
+
+The method is clearly an alphabet-based one, as the spaces are evenly distributed throughout the text. We need to check now if the cipher is a monoalphabetic one or a polyalphabetic one.
+\medskip
+
+We can calculate the index of coincidence of the given ciphertext, which turns out to be 0.05728. Since normal English text has an index of coincidence of around 0.06, we can conclude that the given cipher is a monoalphabetic cipher, most probably substitution or permutation.
+\medskip
+
+Trying direct substitution cipher, we quickly ran into a deadend. So the given cipher is not a direct substitution cipher. But then, the letterwise frequencies differ a lot from frequencies in English text (Y and Z are the most common letters in ciphertext, with 10.37\%), thus it cannot be just a permutation cipher. Thus, the most probable possibility left was a combination of substitution and permutation, which are interchangeable in order.
+
+\pagebreak
+
+\smallskip
+
+  \begin{minipage}{0.2\linewidth}
+\texttt{01: XWYGJ}\\
+\texttt{02: MFPGY}\\
+\texttt{03: PDULI}\\
+\texttt{04: KLRYO}\\
+\texttt{05: KJYJK}\\
+\texttt{06: OYUUY}\\
+\texttt{07: YIMZJ}\\
+\texttt{08: WYQNU}\\
+\texttt{09: LBUZX}\\
+\texttt{10: YGMLG}\\
+\texttt{11: TLOLU}\\
+\texttt{12: IMTLC}\\
+\texttt{13: YKPIY}\\
+\texttt{14: YIWPC}\\
+\texttt{15: OTWOW}\\
+\texttt{16: WOTLF}\\
+\texttt{17: FPZWR}\\
+\texttt{18: XWYGJ}\\
+\texttt{19: IMCTL}\\
+\texttt{20: KYBUY}\\
+\texttt{21: LITPK}\\
+\texttt{22: MUWDS}\\
+\texttt{23: YIMZJ}\\
+\texttt{24: AKLVY}\\
+\texttt{25: GWFFW}\\
+\texttt{26: BUYIM}\\
+\texttt{27: PMLGL}\\
+\texttt{28: DYIMF}\\
+\texttt{29: WSYVW}\\
+\texttt{30: KWULT}\\
+\texttt{31: RUZWR}\\
+\texttt{32: PZIML}\\
+\texttt{33: OTLFQ}\\
+\texttt{34: WSYIM}\\
+\texttt{35: WRDLC}\\
+\texttt{36: WIMOT}\\
+\texttt{37: KKLRM}\\
+\texttt{38: PZMYK}\\
+\texttt{39: PMQPQ}\\
+\texttt{40: DYIMF}\\
+\texttt{41: LUYVW}\\
+\texttt{42: KQPRM}\\
+\texttt{43: YXWSO}\\
+...
+
+\texttt{46: KPTTW}\\
+\texttt{47: IMUUY}\\
+\texttt{48: FWATW}\\
+\texttt{49: PMGWF}\\
+\texttt{50: GIMPC}\\
+\texttt{51: UICQP}\\
+\texttt{52: MXWYB}\\
+\texttt{53: UWBYI}\\
+\texttt{54: OGPRU}\\
+  \end{minipage}
+  \begin{minipage}{0.75\linewidth}
+    \textbf{Breaking the cipher: }
+
+    \begin{enumerate}
+    \item \textbf{Undoing the permutation: }
+    
+    \bigskip
+    
+    Considering that the last phrase and the rest of the text is encrypted differently, we can guess that the period of permutation is a divisor of the length of the last phrase. The length of the last phrase is 10 (excluding the underscores), so the possibilities of period of permutation are $\{2, 5, 10\}$. We can try to rule out a possibility by observation.
+    \medskip
+
+    Consider that the period of permutation is 2. Then the permutation is uniquely determined as \texttt{12 $\rightarrow$ 21}. Now note, in the original ciphertext, the word \texttt{wf} (line 4). The word occurs at index \texttt{244-245}, which means that the \texttt{w} gets exchanged with its preceding character \texttt{g} at 243rd position, while \texttt{f} gets exchanged with the next character \texttt{g}. This makes the word \texttt{wf} to decrypt (un-permute) to \texttt{gg}, which cannot be a valid English word after any substitution. Thus, 2 is not the permutation cipher.
+    \medskip
+
+    So we now check the possibility 5. Notice that the pair of words \texttt{yi mzj} occur twice in the ciphertext, and also when the ciphertext is broken into pieces of 5, the corresponding pair of phrases \texttt{YIMZJ} occur in individual blocks (see block 7 and 23). This is a huge indication that 5 is the required period of permutation.
+    \bigskip
+
+    Now we need to find the permutation. Consider the last few words of the main text: \texttt{buw byiogpru}. We can easily guess that the last word is \texttt{password}. Thus, after the permutation, the 3rd and 4th letter of the last word must be same. Now the last two 5-blocks of the text are \texttt{UWBYI} and \texttt{OGPRU}, which have only \texttt{U} in common. Thus, in the required permutation, \texttt{5 $\rightarrow$ 1} and \texttt{1 $\rightarrow$ 5}. We have now $3! = 6$ possibilities for the rest three slots.
+
+    Consider block 46 now, which contains the word \texttt{tt}. Again, the two letter of a two-letter word cannot be same. Thus we can remove the two possibilities \texttt{123 $\rightarrow$ 132} and \texttt{123 $\rightarrow$ 123}.
+
+    Similarly notice block 5, which contains the word \texttt{jy}. The two letters must not be the same after the un-permutation, thus we can remove one more possibility, \texttt{123 $\rightarrow$ 312}. We are left with three possibilities: \texttt{321, 213, 231}. We can try each possibility one by one.
+    
+  \end{enumerate}
+\end{minipage}
+
+\pagebreak
+  
+After undoing the permutation, we just need to undo the substitution. The unpermuted version is:
+
+\begin{center}
+  \texttt{JGYWXYGPFMILUDPOYRLKKJYJKYUUYOJZMIYUNQYWXZUBLGLMGYULOLTCLTMIYIPKYCPWIY
+  WOWTOFLTOWRWZPFJGYWXLTCMIYUBYKKPTILSDWUMJZMIYYVLKAWFFWGMIYUBLGLMPFMIYDW
+  VYSWTLUWKRWZURLMIZPQFLTOMIYSWCLDRWTOMIWMRLKKKYMZPQPQMPFMIYDWVYULMRPQKOS
+  WXYZPQWSWCLDLWTTPKYUUMIWTAWFFWGMPCPMIGPQCIUBYWXMIYBWUURPGO}
+\end{center}
+This is an easy step. Since the last word probably stands for \texttt{PASSWORD}, we already get the key for 7 alphabets. We can proceed with the standard way of breaking the substitution, to get:
+
+\begin{center}
+  \texttt{BREAKER OF THIS CODE WILL BE BLESSED BY THE SQUEAKY SPIRIT RESIDING IN THE HOLE GO AHEAD AND FIND AWAY OF BREAKING THE SPELL ON HIM CAST BY THE EVIL JAFFAR THE SPIRIT OF THE CAVEMAN IS ALWAYS WITH YOU FIND THE MAGIC WAND THAT WILL LET YOU OUT OF THE CAVES IT WOULD MAKE YOU A MAGICIAN NO LESS THAN JAFFAR TO GO THROUGH SPEAK THE PASSWORD}
+\end{center}
+
+\medskip
+
+The letter H has not been used in the main text, and is necessary to decrypt the passphrase. We checked all the possibilities for H, and got the right passphrase.
+
+$$--------------------$$
+
+\end{document}
+\grid
+\grid
